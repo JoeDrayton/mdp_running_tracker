@@ -1,31 +1,28 @@
 package com.example.mdp_running_tracker;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
+    private boolean recording = false;
+    private static final String[] INITIAL_PERMS = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-       FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -48,5 +45,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onRecordActivity(View v){
+        requestPermissions(INITIAL_PERMS, 1337);
+        LocationManager locationManager =
+                (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        MyLocationListener locationListener = new MyLocationListener();
+
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    5, //min time interval between updates);
+                    5, //min distance between updates, in metres
+                    locationListener);
+        } catch (SecurityException e) {
+            Log.d("g53mdp", e.toString());
+        }
+    }
+
+    public class MyLocationListener implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+            Log.d("g53mdp", location.getLatitude() + " " + location.getLongitude());
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            // information about the signal
+            Log.d("g53mdp", "onStatusChanged: " + provider + " " + status);
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            // the user enabled for example the GPS
+            Log.d("g53mdp", "onProviderEnabled: " + provider);
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            // the user disabled for example the GPS
+            Log.d("g53mdp", "onProviderDisabled: " + provider);
+        }
     }
 }
