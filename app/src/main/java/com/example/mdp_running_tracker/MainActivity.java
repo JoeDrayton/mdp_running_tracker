@@ -1,11 +1,13 @@
 package com.example.mdp_running_tracker;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,13 +58,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRecordActivity(View v){
+        Button recorder = findViewById(R.id.recordButton);
         if(recording){
+            ContentValues coords = new ContentValues();
+            recorder.setText("Record New Activity");
             for(int i=0;i<journey.size();i++){
                 LatLng current = journey.get(i);
+                coords.put(ContentContract.LATITUDE, current.latitude);
+                coords.put(ContentContract.LONGITUDE, current.longitude);
                 Log.d("g53mdp",current.latitude + ":" + current.longitude);
             }
+            Uri result = getContentResolver().insert(ContentContract.COORDINATES_URI, coords);
+            result.toString();
             recording = false;
         } else {
+
+            recorder.setText("Finish");
             requestPermissions(INITIAL_PERMS, 1337);
             LocationManager locationManager =
                     (LocationManager) getSystemService(Context.LOCATION_SERVICE);

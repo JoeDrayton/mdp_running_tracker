@@ -1,9 +1,11 @@
 package com.example.mdp_running_tracker;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
@@ -37,28 +39,105 @@ public class MyContentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+        Log.d("g53mdp", uri.toString() + " " + uriMatcher.match(uri));
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        switch (uriMatcher.match(uri)){
+            case 2:
+                selection = "_ID" + uri.getLastPathSegment();
+            case 1:
+                Log.d("g53mdp", "runs query");
+                return db.query("runs", projection, selection, selectionArgs, null, null, sortOrder);
+            case 3:
+                Log.d("g53mdp", "coordinates query");
+                return db.query("coordinates", projection, selection, selectionArgs, null, null, sortOrder);
+            case 5:
+                Log.d("g53mdp", "run coordinates query");
+                return db.rawQuery("select r._id, r.name, rc.coordinate_id, c.longitude, c.latitude "+
+                                "from runs r "+
+                                "join run_coordinates rc on (r._id = rc.recipe_id)"+
+                                "join coordiantes c on (rc.coordinate_id = c._id) where r._id == ?",
+                        selectionArgs);
+            default:
+                return null;
+        }
     }
 
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        String contentType;
+
+        if(uri.getLastPathSegment() == null) {
+            contentType = ContentContract.CONTENT_TYPE_MULTIPLE;
+        } else {
+            contentType = ContentContract.CONTENT_TYPE_SINGLE;
+        }
+        return contentType;
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        // using uri put content values into database
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String tableName;
+        switch (uriMatcher.match(uri)) {
+            case 1:
+                tableName = "runs";
+                Log.d("g53mdp", "query uri mathched");
+                break;
+            case 3:
+                tableName = "coordinates";
+                break;
+            case 5:
+                tableName = "run_coordinates";
+                break;
+            default:
+                tableName = "runs";
+                break;
+        }
+            long id = db.insert(tableName, null, values);
+            db.close();
+            Uri nu = ContentUris.withAppendedId(uri, id);
+            Log.d("g53mdp", nu.toString());
+            getContext().getContentResolver().notifyChange(nu, null);
+            return nu;
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+            // Deletes from database depending on uri and selection
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            int numDeleted = 0;
+            switch (uriMatcher.match(uri)){
+                case 1:
+                    numDeleted = db.delete("runs", selection, selectionArgs);
+                    break;
+                case 3:
+                    numDeleted = db.delete("coordinates", selection, selectionArgs);
+                    break;
+                case 5:
+                    numDeleted = db.delete("run_coordinates", selection, selectionArgs);
+                    break;
+                default:
+                    break;
+            }
+            return numDeleted;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        Log.d("g53mdp", uri.toString() + " " + uriMatcher.match(uri));
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        switch(uriMatcher.match(uri)){
+            case 1:
+                // updates rating basically, possibly redundant
+                return db.update("runs", values, selection, selectionArgs);
+            default:
+                return 0;
+        }
     }
 }
