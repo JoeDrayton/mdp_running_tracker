@@ -14,8 +14,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private boolean recording = false;
+    private ArrayList<LatLng> journey = new ArrayList<>();
     private static final String[] INITIAL_PERMS = {
             Manifest.permission.ACCESS_FINE_LOCATION
     };
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //journey.clear();
     }
 
     @Override
@@ -48,18 +54,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRecordActivity(View v){
-        requestPermissions(INITIAL_PERMS, 1337);
-        LocationManager locationManager =
-                (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        MyLocationListener locationListener = new MyLocationListener();
+        if(recording){
+            for(int i=0;i<journey.size();i++){
+                LatLng current = journey.get(i);
+                Log.d("g53mdp",current.latitude + ":" + current.longitude);
+            }
+            recording = false;
+        } else {
+            requestPermissions(INITIAL_PERMS, 1337);
+            LocationManager locationManager =
+                    (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            MyLocationListener locationListener = new MyLocationListener();
 
-        try {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    5, //min time interval between updates);
-                    5, //min distance between updates, in metres
-                    locationListener);
-        } catch (SecurityException e) {
-            Log.d("g53mdp", e.toString());
+            try {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        5, //min time interval between updates);
+                        1, //min distance between updates, in metres
+                        locationListener);
+            } catch (SecurityException e) {
+                Log.d("g53mdp", e.toString());
+            }
+            recording = true;
         }
     }
 
@@ -67,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onLocationChanged(Location location) {
             Log.d("g53mdp", location.getLatitude() + " " + location.getLongitude());
+            LatLng current = new LatLng(location.getLatitude(), location.getLongitude());
+            journey.add(current);
         }
 
         @Override
