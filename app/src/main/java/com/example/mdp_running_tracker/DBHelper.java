@@ -18,6 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 "name VARCHAR(128) NOT NULL, " +
                 "description VARCHAR(128) NOT NULL, " +
+                "time VARCHAR(128) NOT NULL, " +
+                "distance FLOAT NOT NULL," +
                 "rating INTEGER" +
                 "); ");
         db.execSQL("CREATE TABLE coordinates ( " +

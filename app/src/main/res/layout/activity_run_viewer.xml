@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RunViewer">
+    tools:context=".AddRun">
 
     <Button
         android:id="@+id/button3"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="284dp"
         android:layout_marginTop="636dp"
-        android:onClick="onReturn"
+        android:onClick="addRun"
         android:text="Add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="636dp"
-        android:onClick="deleteRecipe"
+        android:onClick="cancelRun"
         android:text="Cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,29 +57,15 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Recipe Name" />
+            android:hint="Enter a title" />
 
         <EditText
-            android:id="@+id/instructions"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Instructions" />
-
-        <EditText
-            android:id="@+id/newIngredients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:text="New Ingredients" />
-
-        <ListView
-            android:id="@+id/ingredientView"
-            android:layout_width="match_parent"
-            android:layout_height="380dp" />
+            android:hint="Enter a description" />
 
     </LinearLayout>
 

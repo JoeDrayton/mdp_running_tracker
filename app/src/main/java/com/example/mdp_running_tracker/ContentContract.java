@@ -14,6 +14,8 @@ public class ContentContract {
     public static final String _ID = "_id";
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
+    public static final String TIME = "time";
+    public static final String DISTANCE = "distance";
     public static final String RATING = "rating";
 
     public static final String LATITUDE = "latitude";

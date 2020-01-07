@@ -49,15 +49,23 @@ public class MyContentProvider extends ContentProvider {
                 Log.d("g53mdp", "runs query");
                 return db.query("runs", projection, selection, selectionArgs, null, null, sortOrder);
             case 3:
-                Log.d("g53mdp", "coordinates query");
-                return db.query("coordinates", projection, selection, selectionArgs, null, null, sortOrder);
+                Log.d("g53mdp", "runs query");
+                return db.query("runs", projection, selection, selectionArgs, null, null, sortOrder);
             case 5:
                 Log.d("g53mdp", "run coordinates query");
-                return db.rawQuery("select r._id, r.name, rc.coordinate_id, c.longitude, c.latitude "+
+                return db.rawQuery("select r._id, r.name, rc.coordinate_id, c.latitude, c.longitude "+
                                 "from runs r "+
-                                "join run_coordinates rc on (r._id = rc.recipe_id)"+
-                                "join coordiantes c on (rc.coordinate_id = c._id) where r._id == ?",
+                                "join run_coordinates rc on (r._id = rc.run_id)"+
+                                "join coordinates c on (rc.coordinate_id = c._id) where r._id == ?",
+                                selectionArgs);
+            case 8:
+                Log.d("g53mdp", "run coordinates special query");
+                return db.rawQuery("select r._id, r.name, rc.coordinate_id, c.latitude, c.longitude "+
+                                "from runs r "+
+                                "join run_coordinates rc on (r._id = ri.run_id)"+
+                                "join coordinates c on (rc.coordinate_id = c._id) where c._id == ?",
                         selectionArgs);
+
             default:
                 return null;
         }
