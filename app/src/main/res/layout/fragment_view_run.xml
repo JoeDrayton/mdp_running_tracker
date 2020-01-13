@@ -10,8 +10,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="393dp"
-        android:layout_height="245dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,36 +25,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Run Name"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Run Description"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Active time"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distance Travelled"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/averagespeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average Speed"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weather"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rating"
-            android:textSize="36sp" />
+            android:textSize="24sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/runImageView"
+        android:layout_width="397dp"
+        android:layout_height="349dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:src="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

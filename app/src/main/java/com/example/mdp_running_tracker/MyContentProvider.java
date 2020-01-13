@@ -29,6 +29,11 @@ public class MyContentProvider extends ContentProvider {
         uriMatcher.addURI(ContentContract.AUTHORITY, "run_coordinates_special",8);
         uriMatcher.addURI(ContentContract.AUTHORITY, "*",7);
     }
+
+    /**
+     * Initialises dbHelper for the provider
+     * @return
+     */
     @Override
     public boolean onCreate() {
         Log.d("g53mdp", "contentProvider onCreate");
@@ -36,6 +41,15 @@ public class MyContentProvider extends ContentProvider {
         return true;
     }
 
+    /**
+     * Query method for the ContentProvider
+     * @param uri
+     * @param projection
+     * @param selection
+     * @param selectionArgs
+     * @param sortOrder
+     * @return
+     */
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
@@ -84,6 +98,12 @@ public class MyContentProvider extends ContentProvider {
         return contentType;
     }
 
+    /**
+     * Insert method for ContentProvider
+     * @param uri
+     * @param values
+     * @return
+     */
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
@@ -93,7 +113,7 @@ public class MyContentProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case 1:
                 tableName = "runs";
-                Log.d("g53mdp", "query uri mathched");
+                Log.d("g53mdp", "query uri matched");
                 break;
             case 3:
                 tableName = "coordinates";
@@ -113,6 +133,13 @@ public class MyContentProvider extends ContentProvider {
             return nu;
     }
 
+    /**
+     * Delete method for ContentProvider
+     * @param uri
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
             // Deletes from database depending on uri and selection
@@ -134,6 +161,14 @@ public class MyContentProvider extends ContentProvider {
             return numDeleted;
     }
 
+    /**
+     * Update Override
+     * @param uri
+     * @param values
+     * @param selection
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         Log.d("g53mdp", uri.toString() + " " + uriMatcher.match(uri));
@@ -141,9 +176,6 @@ public class MyContentProvider extends ContentProvider {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         switch(uriMatcher.match(uri)){
-            case 1:
-                // updates rating basically, possibly redundant
-                return db.update("runs", values, selection, selectionArgs);
             default:
                 return 0;
         }

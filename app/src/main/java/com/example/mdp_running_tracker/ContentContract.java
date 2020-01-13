@@ -15,7 +15,11 @@ public class ContentContract {
     public static final String NAME = "name";
     public static final String DESCRIPTION = "description";
     public static final String TIME = "time";
+    public static final String DATE = "date";
     public static final String DISTANCE = "distance";
+    public static final String WEATHER = "weather";
+    public static final String AVGSPEED = "avgspeed";
+    public static final String IMAGE = "image";
     public static final String RATING = "rating";
 
     public static final String LATITUDE = "latitude";

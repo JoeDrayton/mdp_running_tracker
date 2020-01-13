@@ -14,12 +14,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("g53mdp", "database initialised");
         db.execSQL("CREATE TABLE runs (" +
-                "_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                "_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 "name VARCHAR(128) NOT NULL, " +
                 "description VARCHAR(128) NOT NULL, " +
-                "time VARCHAR(128) NOT NULL, " +
+                "time VARCHAR(128) NOT NULL," +
+                "date VARCHAR(128) NOT NULL," +
                 "distance FLOAT NOT NULL," +
+                "weather VARCHAR(128) NOT NULL," +
+                "avgspeed DOUBLE NOT NULL, " +
+                "image VARCHAR(128)," +
                 "rating INTEGER" +
                 "); ");
         db.execSQL("CREATE TABLE coordinates ( " +

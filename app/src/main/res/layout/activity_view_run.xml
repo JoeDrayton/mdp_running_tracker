@@ -14,12 +14,16 @@
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColor="#f2e6ff"
+            android:background = "@drawable/roundedbutton"
             android:id="@+id/data"
             android:layout_height="wrap_content"
             android:text="Run Info" />
         <Button
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColor="#f2e6ff"
+            android:background = "@drawable/roundedbutton"
             android:id="@+id/maps"
             android:layout_height="wrap_content"
             android:text="Map Fragment" />
@@ -42,6 +46,8 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background = "@drawable/roundedbutton"
+            android:textColor="#f2e6ff"
             android:layout_weight="1"
             android:onClick="onBack"
             android:text="Back" />
@@ -50,6 +56,8 @@
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background = "@drawable/roundedbutton"
+            android:textColor="#f2e6ff"
             android:layout_weight="1"
             android:onClick="onDelete"
             android:text="Delete" />
