@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddRunActivity">
+
+    <Button
+        android:id="@+id/addRun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="636dp"
+        android:background="@drawable/roundedbutton"
+        android:onClick="addRun"
+        android:text="Add"
+        android:textColor="#f2e6ff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancelRun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="636dp"
+        android:background="@drawable/roundedbutton"
+        android:onClick="cancelRun"
+        android:text="Cancel"
+        android:textColor="#f2e6ff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/rating"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="353dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="120dp"
+        android:max="5"
+        android:progress="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="517dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter a title"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter a description"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How was the weather?"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/weatherSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sunny"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:text="Sunny" />
+
+            <RadioButton
+                android:id="@+id/cloudy"
+                android:layout_width="89dp"
+                android:layout_height="wrap_content"
+                android:text="Cloudy" />
+
+            <RadioButton
+                android:id="@+id/rainy"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="Rainy" />
+
+            <RadioButton
+                android:id="@+id/snowy"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="Snowy" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="314dp"
+            android:scaleType="fitCenter" />
+
+        <Button
+            android:id="@+id/addImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundedbutton"
+            android:onClick="openCameraIntent"
+            android:text="Add Image"
+            android:textColor="#f2e6ff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/rateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="152dp"
+        android:text="How do you rate this activity?"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

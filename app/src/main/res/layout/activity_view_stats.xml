@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewStatsActivity">
+
+    <LinearLayout
+        android:layout_width="413dp"
+        android:layout_height="619dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/runsToday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total distance today:"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/runsWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total distance this week:"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/runsMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total distance this month"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/avgSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Average speed this week"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:text="Top 5 activities"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/runCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/Distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Distance"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/Speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Speed" />
+
+            <RadioButton
+                android:id="@+id/Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Time" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:text="Run ID:" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="74dp"
+                android:layout_height="match_parent"
+                android:text="Name:" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="79dp"
+                android:layout_height="match_parent"
+                android:text="Time:" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="Distance:" />
+
+            <TextView
+                android:id="@+id/averageSpeed"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="Average speed:" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rating:" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/topFiveRuns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="#f2e6ff"
+        android:background = "@drawable/roundedbutton"
+        android:onClick="goBack"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
